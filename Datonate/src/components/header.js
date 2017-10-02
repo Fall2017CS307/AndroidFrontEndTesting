@@ -1,15 +1,16 @@
 // Importing libraries
 import React from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, Image } from 'react-native';
 import Button from 'react-native-button';
 
 // Creating component
 const Header = (props) => {
-  const { textStyle, viewStyle, bodytextStyle, textbar, buttonStyle } = styles;
+  const { textStyle, viewStyle, bodytextStyle, textbar, buttonStyle, backgroundImage } = styles;
   this.state = { text: 'Email' };
   this.pstate = { text: 'Password' };
 
   return (
+    <Image source={require('../images/background.jpg')} style={backgroundImage}>
     <View style={viewStyle}>
       <Text style={textStyle}>{props.headerText}</Text>
       <Text style={bodytextStyle}>{props.pagebodyText}</Text>
@@ -17,12 +18,12 @@ const Header = (props) => {
       <TextInput style={textbar} onChangeText={(text) => this.setState({text})} value={this.pstate.text}/>
       <Button style={buttonStyle}> Go </Button>
     </View>
+    </Image>
   );
 };
 
 const styles = {
   viewStyle: {
-    backgroundColor: '#5795ec',
     alignItems: 'center',
     height: 700,
     paddingTop: 50,
@@ -31,7 +32,7 @@ const styles = {
   },
   textStyle: {
     fontSize: 50,
-    color: '#000000'
+    color: '#ffffff'
   },
   bodytextStyle: {
     fontSize: 30,
@@ -41,18 +42,25 @@ const styles = {
   },
   textbar: {
     height: 50,
-    borderColor: 'gray',
+    borderColor: 'white',
+    color: 'white',
     borderWidth: 0,
     paddingTop: 20,
     width: 200,
   },
   buttonStyle: {
     fontSize: 20,
-    color: '#2cdb49',
+    color: 'black',
     borderWidth: 2,
-    borderColor: '#2cdb49',
-    width: 50,
+    borderColor: 'white',
+    backgroundColor: 'white',
+    width: 100,
     marginTop: 60,
+  },
+  backgroundImage: {
+    flex: 1,
+    alignSelf: 'stretch',
+    width: null,
   }
 };
 
