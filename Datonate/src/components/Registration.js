@@ -4,6 +4,7 @@ import Buttons from './Buttons'
 
 class Registration extends Component {
   render(){
+    this.state = {number: ""};
     const { navigate } = this.props.navigation;
     const {page, inputBox, container, header, buttonStyle, headerContainer} = styles;
   return (
@@ -41,6 +42,14 @@ class Registration extends Component {
     autoCorrect =  {false}
     style = {inputBox}
   />
+  <TextInput
+  style={inputBox}
+  placeholder = "Phone number"
+  keyboardType = 'numeric'
+  onChangeText = {(text)=> this.onChanged(text)}
+  defaultValue = {this.state.number}
+  maxLength = {10}  //setting limit of input
+  />
   <View style = {buttonStyle}>
   <Buttons
     title="Register"
@@ -49,6 +58,21 @@ class Registration extends Component {
   </View>
   </View>
   );
+  }
+  onChanged(text){
+   let newText = '';
+   let numbers = '0123456789';
+
+   for (var i=0; i < text.length; i++) {
+        if(numbers.indexOf(text[i]) > -1 ) {
+             newText = newText + text[i];
+        }
+        else {
+              // your call back function
+              alert("Please enter numbers only");
+         }
+         this.setState({ number: newText });
+    }
   }
 }
 
