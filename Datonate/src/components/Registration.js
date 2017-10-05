@@ -3,8 +3,17 @@ import { StyleSheet, TextInput, View, Text, Image } from 'react-native';
 import Buttons from './Buttons'
 
 class Registration extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+                 number: "",
+                 firstName: "",
+                 lastName: "",
+                 email: "",
+                 password: "",
+                     };
+  }
   render(){
-    this.state = {number: ""};
     const { navigate } = this.props.navigation;
     const {page, inputBox, container, header, buttonStyle, headerContainer} = styles;
   return (
@@ -19,12 +28,16 @@ class Registration extends Component {
     returnKeyType = "next"
     autoCorrect =  {false}
     style = {inputBox}
+    onChangeText = {(firstName)=> this.setState({firstName})}
+    defaultValue = {this.state.firstName}
   />
   <TextInput
     placeholder="Last Name"
     returnKeyType = "next"
     autoCorrect =  {false}
     style = {inputBox}
+    onChangeText = {(lastName)=> this.setState({lastName})}
+    defaultValue = {this.state.lastName}
   />
   <TextInput
     placeholder="E-mail"
@@ -33,6 +46,8 @@ class Registration extends Component {
     autoCapitalize = "none"
     autoCorrect =  {false}
     style = {inputBox}
+    onChangeText = {(email)=> this.setState({email})}
+    defaultValue = {this.state.email}
   />
   <TextInput
     placeholder="Password"
@@ -40,26 +55,34 @@ class Registration extends Component {
     secureTextEntry
     autoCapitalize = "none"
     autoCorrect =  {false}
+    onChangeText = {(password)=> this.setState({password})}
+    defaultValue = {this.state.password}
     style = {inputBox}
   />
   <TextInput
   style={inputBox}
   placeholder = "Phone number"
   keyboardType = 'numeric'
-  onChangeText = {(text)=> this.onChanged(text)}
+  onChangeText = {(number)=> this.onChangeNumber(number)}
   defaultValue = {this.state.number}
   maxLength = {10}  //setting limit of input
   />
   <View style = {buttonStyle}>
   <Buttons
     title="Register"
+    firstName = {this.state.firstName}
+    lastName = {this.state.lasttName}
+    password = {this.state.password}
+    email = {this.state.email}
+    number = {this.state.number}
+
   />
   </View>
   </View>
   </View>
   );
   }
-  onChanged(text){
+  onChangeNumber(text){
    let newText = '';
    let numbers = '0123456789';
 
@@ -72,6 +95,7 @@ class Registration extends Component {
               alert("Please enter numbers only");
          }
          this.setState({ number: newText });
+         console.log(this.state);
     }
   }
 }
