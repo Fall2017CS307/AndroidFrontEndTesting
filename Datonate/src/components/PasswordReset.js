@@ -4,52 +4,25 @@ import { Text, View, TextInput, Image } from 'react-native';
 import Button from 'react-native-button';
 
 // Creating component
-class LoginPage extends Component {
+class PasswordReset extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      email: ''
     }
-  }
-
-  _userLogin = (props) => {
-    var myRequest = new Request('http://65db2b5d.ngrok.io/api/login', {method: 'POST', body: JSON.stringify({
-      email: this.state.email,
-      password: this.state.password
-    })
-  });
-    fetch(myRequest)
-    .then(function(response) {
-        if(response.status == 200) {
-          var responseString = response._bodyText.toString();
-          if (responseString.includes('200')) alert("Login Successful");
-          else alert("Login Failed");
-        }
-        else throw new Error('API fault detected.');
-    })
-    .then(function(response) {
-        console.debug(response);
-    })
-    .catch(function(error) {
-        console.error(error);
-    });
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    const { textStyle, viewStyle, bodytextStyle, textbar, buttonStyle, buttonStyle2, backgroundImage } = styles;
+    const { textStyle, viewStyle, bodytextStyle, textbar, buttonStyle, backgroundImage } = styles;
 
     return (
       <Image source={require('../images/background.jpg')} style={backgroundImage}>
       <View style={viewStyle}>
         <Text style={textStyle}>Datonate</Text>
-        <Text style={bodytextStyle}>Login</Text>
+        <Text style={bodytextStyle}>Password Reset</Text>
         <TextInput placeholder='Email' style={textbar} onChangeText={(email) => this.setState({email})}/>
-        <TextInput placeholder='Password' style={textbar} onChangeText={(password) => this.setState({password})}/>
-        <Button style={buttonStyle} onPress={this._userLogin}> Go </Button>
-        <Button style={buttonStyle2} onPress={() => navigate('Registration')}> Register </Button>
-        <Button style={buttonStyle2} onPress={() => navigate('Reset')}> Reset Password </Button>
+        <Button style={buttonStyle}> Reset </Button>
       </View>
       </Image>
     );
@@ -108,4 +81,4 @@ const styles = {
 };
 
 // Exporting Component
-export default LoginPage;
+export default PasswordReset;
