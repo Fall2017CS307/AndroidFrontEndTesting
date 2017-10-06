@@ -12,9 +12,13 @@ class PasswordReset extends Component {
     }
   }
 
+  _userReset = () => {
+    alert("A reset code has been sent to " + this.state.email);
+  }
+
   render() {
     const { navigate } = this.props.navigation;
-    const { textStyle, viewStyle, bodytextStyle, textbar, buttonStyle, backgroundImage } = styles;
+    const { textStyle, viewStyle, bodytextStyle, textbar, buttonStyle, buttonStyle2, backgroundImage } = styles;
 
     return (
       <Image source={require('../images/background.jpg')} style={backgroundImage}>
@@ -22,7 +26,8 @@ class PasswordReset extends Component {
         <Text style={textStyle}>Datonate</Text>
         <Text style={bodytextStyle}>Password Reset</Text>
         <TextInput placeholder='Email' style={textbar} onChangeText={(email) => this.setState({email})}/>
-        <Button style={buttonStyle}> Reset </Button>
+        <Button style={buttonStyle} onPress={this._userReset}> Reset </Button>
+        <Button style={buttonStyle2} onPress={() => navigate('Login')}> Back </Button>
       </View>
       </Image>
     );
