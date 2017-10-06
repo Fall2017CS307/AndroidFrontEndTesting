@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput, View, Text, Image } from 'react-native';
-import Buttons from './Buttons'
+import { StyleSheet, TextInput, View, Text, Image, Button } from 'react-native';
+//import Buttons from './Buttons'
 
 class Registration extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Registration extends Component {
   }
   render(){
     const { navigate } = this.props.navigation;
-    const {page, inputBox, container, header, buttonStyle, headerContainer} = styles;
+    const {page, inputBox, container, header, buttonStyle, headerContainer, buttonViewStyle} = styles;
   return (
   <View style={page}>
 
@@ -67,20 +67,54 @@ class Registration extends Component {
   defaultValue = {this.state.number}
   maxLength = {10}  //setting limit of input
   />
-  <View style = {buttonStyle}>
-  <Buttons
+  <View style = {buttonViewStyle}>
+  <Button
     title="Register"
-    firstName = {this.state.firstName}
-    lastName = {this.state.lasttName}
-    password = {this.state.password}
-    email = {this.state.email}
-    number = {this.state.number}
+    // firstName = {this.state.firstName}
+    // lastName = {this.state.lasttName}
+    // password = {this.state.password}
+    // email = {this.state.email}
+    // number = {this.state.number}
+    style={buttonStyle}
+    onPress = {this.sendRequest.bind(this)}
 
   />
   </View>
   </View>
   </View>
   );
+  }
+  sendRequest() {
+    //console.log(this.state.firstName);
+    var firstName = this.state.firstName;
+    var lastName = this.state.lastName;
+    var email = this.state.email;
+    var password = this.state.password;
+    var phone = this.state.number;
+    var request = new Request('http://65db2b5d.ngrok.io/api/register', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
+        phone: phone,
+      })
+    });
+    fetch(request)
+    .then(function(response){
+      //console.log(name);
+      console.log(response);
+    })
+    .catch(function(error){
+      //console.log(this.state.firstName);
+      alert("Error caught");
+      console.log(error);
+    });
   }
   onChangeNumber(text){
    let newText = '';
@@ -95,7 +129,7 @@ class Registration extends Component {
               alert("Please enter numbers only");
          }
          this.setState({ number: newText });
-         console.log(this.state);
+        // console.log(this.state);
     }
   }
 }
@@ -120,17 +154,21 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#000000',
   },
-  buttonStyle: {
+  buttonViewStyle: {
     alignItems: 'center',
     //marginLeft: 100,
     //marginRight: 100,
     marginTop: 20,
     width: 350,
   },
+  buttonStyle: {
+        color: '#0be06e',
+  },
   headerContainer: {
     alignItems: 'center',
     marginTop: 50,
-  }
+  },
+
 });
 
 export default Registration;
