@@ -1,6 +1,6 @@
 // Importing libraries
 import React, { Component } from 'react';
-import { Text, View, TextInput, Image } from 'react-native';
+import { Text, ScrollView, TextInput, Image } from 'react-native';
 import Button from 'react-native-button';
 
 // Creating component
@@ -42,7 +42,7 @@ class LoginPage extends Component {
 
     return (
       <Image source={require('../images/background.jpg')} style={backgroundImage}>
-      <View style={viewStyle}>
+      <ScrollView contentContainerStyle={viewStyle}>
         <Text style={textStyle}>Datonate</Text>
         <Text style={bodytextStyle}>Login</Text>
         <TextInput placeholder='Email' style={textbar} onChangeText={(email) => this.setState({email})}/>
@@ -50,7 +50,7 @@ class LoginPage extends Component {
         <Button style={buttonStyle} onPress={this._userLogin}> Go </Button>
         <Button style={buttonStyle2} onPress={() => navigate('Registration')}> Register </Button>
         <Button style={buttonStyle2} onPress={() => navigate('Reset')}> Reset Password </Button>
-      </View>
+      </ScrollView>
       </Image>
     );
   }
@@ -89,7 +89,7 @@ const styles = {
     borderColor: 'white',
     backgroundColor: 'white',
     width: 100,
-    marginTop: 60,
+    marginTop: 40,
   },
   buttonStyle2: {
     fontSize: 20,
