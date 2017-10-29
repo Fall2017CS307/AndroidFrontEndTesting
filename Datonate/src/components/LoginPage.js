@@ -49,8 +49,13 @@ class LoginPage extends Component {
         <TextInput placeholder='Password' style={textbar} onChangeText={(password) => this.setState({password})}/>
         <Button style={buttonStyle} onPress={this._userLogin}> Go </Button>
         <Button style={buttonStyle2} onPress={() => navigate('Registration')}> Register </Button>
+<<<<<<< HEAD
+        <Button style={buttonStyle2} onPress={() => navigate('Landing')}> Reset Password </Button>
+      </View>
+=======
         <Button style={buttonStyle2} onPress={() => navigate('Reset')}> Reset Password </Button>
       </ScrollView>
+>>>>>>> 01373545786e0a52e172cab66221587799b0b987
       </Image>
     );
   }
